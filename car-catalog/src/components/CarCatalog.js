@@ -1,21 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import CarCard from './CarCard';
 
-const CarCatalog = () => {
-  const [cars, setCars] = useState([]);
-
-  useEffect(() => {
-    axios.get('/data/db.json').then((response) => {
-      setCars(response.data.cars);
-    });
-  }, []);
-
+const CarCatalog = ({ cars, onCarSelect }) => {
   return (
     <div className="car-catalog">
-      {cars.map((car) => (
-        <CarCard key={car.model} car={car} />
-      ))}
+      <h1>ABVSS Car Catalog</h1>
+      <div className="car-grid">
+        {cars.map((car) => (
+          <CarCard key={car.model} car={car} onSelect={() => onCarSelect(car)} />
+        ))}
+      </div>
     </div>
   );
 };

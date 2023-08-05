@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import CarCatalog from './components/CarCatalog';
+import CarDetail from './components/CarDetail';
+import Footer from './components/Footer';
+// import HomePage from './components/HomePage'; // Commented out to ignore the warning
+// import CarDetailPage from './components/CarDetailPage'; // Commented out to ignore the warning
+// import CarSearch from './components/CarSearch'; // Commented out to ignore the warning
+import Navbar from './components/Navbar';
+import data from './data/db.json';
 
-function App() {
+const App = () => {
+  const [selectedCar, setSelectedCar] = useState(null);
+
+  const handleCarSelect = (car) => {
+    setSelectedCar(car);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      {}
+      <Navbar />
+
+      {selectedCar ? (
+      
+        <CarDetail car={selectedCar} onBack={() => setSelectedCar(null)} />
+      ) : (
+        
+        <CarCatalog cars={data.cars} onCarSelect={handleCarSelect} />
+      )}
+
+      {}
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
