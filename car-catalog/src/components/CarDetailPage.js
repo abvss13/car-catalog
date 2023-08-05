@@ -1,10 +1,7 @@
 import React from 'react';
-import { useParams } from 'react-router-dom'; // Remove this line since we are not using React Router
-
 import CarDetail from './CarDetail';
 
-const CarDetailPage = ({ cars }) => {
-  const { model } = useParams(); // Remove this line since we are not using React Router
+const CarDetailPage = ({ cars, model }) => {
   const car = cars.find((car) => car.model === model);
 
   return (

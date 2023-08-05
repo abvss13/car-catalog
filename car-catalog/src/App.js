@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 // import CarSearch from './components/CarSearch'; // Commented out to ignore the warning
 import Navbar from './components/Navbar';
 import data from './data/db.json';
+import './App.css'
 
 const App = () => {
   const [selectedCar, setSelectedCar] = useState(null);

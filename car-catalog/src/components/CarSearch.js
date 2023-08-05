@@ -1,28 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import CarCard from './CarCard';
+import CarSearch from './CarSearch';
 
-const CarSearch = ({ cars, setFilteredCars }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+const HomePage = () => {
+  const [cars, setCars] = useState([]);
+  const [filteredCars, setFilteredCars] = useState([]);
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-    const filteredCars = cars.filter(
-      (car) =>
-        car.brand.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        car.model.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-    setFilteredCars(filteredCars);
-  };
+  useEffect(() => {
+    axios.get('/data/db.json').then((response) => {
+      setCars(response.data.cars);
+      setFilteredCars(response.data.cars);
+    });
+  }, []);
 
   return (
-    <div className="car-search">
-      <input
-        type="text"
-        placeholder="Search by Brand or Model"
-        value={searchTerm}
-        onChange={handleSearch}
-      />
+    <div>
+      <CarSearch cars={cars} setFilteredCars={setFilteredCars} />
+      <div className="car-catalog">
+        {filteredCars.map((car) => (
+          <CarCard key={car.model} car={car} />
+        ))}
+      </div>
     </div>
   );
 };
 
-export default CarSearch;
+export default HomePage;
