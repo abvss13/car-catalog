@@ -482,7 +482,7 @@
     "engine_type": "V8",
     "acceleration": "0-100 km/h in 5.6 seconds",
     "release_date": "2020-11-30",
-    "maximum_speed": "250 km/h"
+    "maximum_sapeed": "250 km/h"
     }
     ]
     }
